@@ -1,0 +1,167 @@
+EXPLANATION OF OYSTERCATCHER GPS DATA  -  Emiel van Loon
+
+======= INTRODUCTION =======
+
+This archive contains several comma-delimited ascii files
+with data on the movement of three Oystercatchers. 
+It has been previously described and used in the article
+'From sensor data to animal behaviour: an oystercatcher 
+example.' by Shamoun-Baranes et al. (2012) (PLoS One,7(5), 
+e37997. http://dx.doi.org/10.1371%2Fjournal.pone.0037997). 
+This paper will be called S2B in the remainder of this 
+text.
+
+
+======= ORIGINS OF THE DATA ======= 
+
+The data result from a field study during May - July 2009. 
+Three birds were equipped with the University of Amsterdam 
+Bird Tracking System (UvA-BiTS).
+This system registered location and acceleration. From
+June 30 till July 31 2009 a GPS fix was taken every 10 
+minutes. Each GPS fix was followed by an acceleration 
+measurement during 3 seconds at 20 Hz.
+From 30 June through 14 July 2009, the behaviour of each 
+bird was also observed and registered daily for 30 minutes 
+with a telescope. During these visual observations, the 
+tracking device was set to take a GPS fix every 10 seconds 
+followed by 3 seconds of acceleration measurements.
+A more complete and detailed description of the field work  
+can be found in the methods section of S2B. 
+
+The data resulting from this field work has been stored in 
+different tables:
+ gps           - location and instantaneous speed, 
+                 measured by GPS sensor 
+ accelerometer - acceleration at each GPS fix during 3 sec. 
+                 at 20 Hz in 3D, by accelerometer sensor 
+ behaviour     - observed behaviour (16 classes) and
+                 aggregations thereof (8 and 3 classes),
+                 corresponding to Table 2 in S2B.
+
+More details of these tables are given in the next section
+(DETALS OF DATA TABLES).
+ 
+To build classification models on the basis of sensor data 
+and observed behaviour, the raw accelerometer data were not 
+used directly, but aggregate variables were calculated (so
+called predictor variables, see Table 3 in S2B). The 
+predictor variables were stored in a separate table 
+(predictors). For each record in the behaviour table there 
+is a corresponding record in the predictors table. But not
+the other way around: the predictors table contains many 
+records where only sensor data was recorded while the 
+behaviour was not observed visually.  
+
+After deriving two suitable classification models (SA3 and 
+SA8), these were applied on all cases where sensor data
+were available (all records in the predictors table), and 
+the resulting classifications were stored in a separate 
+table(model_output).      
+
+On the basis of this model output, a time budget 
+calculation was made. The time spent on different 
+behaviours was established while distinguishing day and 
+night as well as three spatial zones (territory, saltmarsh 
+and mudflats). The information required for the time budget 
+calculation (the time period and zone for each GPS fix), 
+was stored in a separate table (habitat).
+
+
+======= DETAILS OF DATA TABLES ======= 
+
+The data comprises six tables: gps, accelerometer, 
+behaviour, predictors, model_output and habitat.  
+The contents of these tables are as follows.
+
+-----------------------------------------------------------
+gps (16434 records)
+
+  obsID     - unique identifier per gps fix
+  birdID    - logger number, unique per bird
+  date_time - date-time stamp (UTC) of gps fix
+  y         - y-coordinate in m, Dutch coord. system RDnew
+  x         - x-coordinate in m, Dutch coord. system RDnew
+  speed     - instantaneous speed (3D, in m/s)
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+accelerometer (972406 records) 
+examples of accelerometer data are given in S2B, Figure 5    
+
+  obsID          - unique identifier per gps fix
+  index          - index per accelerometer observation, 
+                   generally ranging from 0 to 59
+  x_acceleration - acceleration in the x-axis, surge (in g;
+                   1 g = acceleration due to gravity 
+                       = 9.81 m/s^2)
+  y_acceleration - acceleration in the y-axis, sway (in g)
+  z_acceleration - acceleration in the z-axis, heave (in g)
+-----------------------------------------------------------
+
+-----------------------------------------------------------  
+behaviour (702 records)
+details are given in S2B, Table 2    
+
+  obsID - unique identifier per gps fix
+  OB3   - observed behaviour, 3 categories: no movement,  
+          ter. locomotion, fly
+  OB8   - observed behaviour, 8 categories: aggression, 
+          body care, fly, forage, handle, sit, stand,walk 
+  OB16  - observed behaviour, 16 categories
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+predictors (16434 records)
+details are given in S2B, Table 3
+
+  obsID  - unique identifier per gps fix
+  pitchZ - average angle of the body in the Z dir. (in °) 
+  pitchX - average angle of the body in the X dir. (in °)
+  rollY  - average angle of the body in the Y dir. (in °)
+  mdbaX  - max. dynamic acceleration in the X dir. (in g)
+  mdbaY  - max. dynamic acceleration in the Y dir. (in g)
+  mdbaZ  - max. dynamic acceleration in the Z dir. (in g)
+  odbaX  - average absolute dynamic acceleration in the 
+           X direction (in g)
+  odbaY  - average absolute dynamic acceleration in the 
+           Y direction (in g)
+  odbaZ  - average absolute dynamic acceleration in the 
+           Z direction (in g)
+  odba   - overall dynamic body acceleration 
+           (= odbaX + odbaY + odbaZ, in g)
+  dpsX   - maximum power spectral density for the 
+           x-acceleration (in W/Hz)
+  fdpsX  - frequency of dpsX (in Hz)
+  dpsY   - maximum power spectral density for the 
+           y-acceleration (in W/Hz)
+  fdpsY  - frequency of dpsY (in Hz)
+  dpsZ   - maximum power spectral density for the 
+           z-acceleration (in W/Hz)
+  fdpsZ  - frequency of dpsZ (in Hz)
+  speed  - instantaneous speed (3D, in m/s) [note: same
+           values as in the gps table]
+-----------------------------------------------------------
+
+-----------------------------------------------------------           
+model_output (16434 records)
+details are given in S2B, Figures 3b and 4
+
+  obsID - unique identifier per gps fix
+  SA3   - SA3 model output, 3 classes: fly, no locomotion, 
+          terr. locomotion
+  SA8   - SA8 model output, 5 classes: body care, fly, 
+          forage, sit, stand
+-----------------------------------------------------------
+
+-----------------------------------------------------------  
+habitat (11689 records)
+details are given in S2B, Figure 6    
+
+  obsID    - unique identifier per gps fix
+  timelbl2 - time of day, 2 classes: day, night
+  timelbl3 - time of day, 3 classes: day, twighlight, night
+  place    - habitat, 4 classes: Roost, Territory, 
+             Mudflats, Mudflats_Territory 
+-----------------------------------------------------------
+ 
