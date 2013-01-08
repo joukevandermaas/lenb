@@ -1,0 +1,4 @@
+"obsID","SA3","SA8"
+@attribute obsID numeric
+@attribute SA3 numeric
+@attribute SA8 numeric

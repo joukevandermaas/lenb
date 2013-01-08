@@ -1,0 +1,7 @@
+@attribute obsID numeric
+@attribute birdID numeric
+@attribute day numeric
+@attribute time numeric
+@attribute y numeric
+@attribute x numeric
+@attribute speed numeric

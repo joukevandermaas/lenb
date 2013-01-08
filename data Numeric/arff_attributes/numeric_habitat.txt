@@ -1,0 +1,5 @@
+"obsID","timelbl2","timelbl3","place"
+@attribute obsID numeric
+@attribute timelbl2 numeric
+@attribute timelbl3 numeric
+@attribute place numeric

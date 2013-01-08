@@ -1,0 +1,5 @@
+@attribute obsID numeric
+@attribute index numeric
+@attribute x_acceleration numeric
+@attribute y_acceleration numeric
+@attribute z_acceleration numeric
