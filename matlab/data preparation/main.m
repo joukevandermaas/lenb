@@ -7,7 +7,7 @@ function [ output_args ] = main()
 %   This function rewrites the data for classification and for use in WEKA.
 %   -Numeric values are copied
 %   -Discrete string values are made numeric
-%   -Values in date_time format 'yyyy-mm-dd hh:mm:ss' are 
+%   -Values in date_time format 'yyyy-mm-dd hh:mm:ss' are split into 'day' and 'minute'
 %   -'NA' is rewritten as '?'
 
     BEHAVIOUR = FileToCells('../../data/behaviour.csv', ',');
