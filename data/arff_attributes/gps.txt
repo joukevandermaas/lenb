@@ -1,0 +1,7 @@
+@attribute row_names numeric
+@attribute obsID numeric
+@attribute birdID numeric
+@attribute date_time date 'yyyy-MM-dd HH:mm:ss'
+@attribute y numeric
+@attribute x numeric
+@attribute speed numeric
