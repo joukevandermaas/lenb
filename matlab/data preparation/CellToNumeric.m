@@ -1,9 +1,11 @@
-function NumericData = CellToNumeric(Data)
+function NumericData = CellToNumeric(Data, splitDates, Str2Num)
 %   Converts a cell-array with different types to one with only numeric
 %   values ins strings and a '?' string for missing values.
 %   The output cell-array is still a string-array.
 %   Compatible input types: integer values, float values, discrete strings,
 %   data-specific date_time values, the string 'NA' for missing values
+%   ARGS:   splitDates: split date_time if 1
+%           Str2Num: make string values numeric if 1
     
     nRows = size(Data, 1);
     nCols = size(Data, 2);
@@ -23,16 +25,24 @@ function NumericData = CellToNumeric(Data)
             %split date_time column in two columns
             % (1) nth day of the year
             % (2) m minutes after 00:00
-            Days = cell(nRows,1);
-            Minutes = cell(nRows,1);
-            for j=1:nRows
-                date_time = sscanf(Data{j,i}, '%d-%d-%d %d:%d:%d');
-                Minutes{j,1} = num2str(((date_time(4,1)*60)+date_time(5,1)), '%d');
-                Days{j,1} = num2str(DayOfYear(date_time(2,1), date_time(3,1)) , '%d');
+            if(splitDates)
+                Days = cell(nRows,1);
+                Minutes = cell(nRows,1);
+                for j=1:nRows
+                    date_time = sscanf(Data{j,i}, '%d-%d-%d %d:%d:%d');
+                    Minutes{j,1} = num2str(((date_time(4,1)*60)+date_time(5,1)), '%d');
+                    Days{j,1} = num2str(DayOfYear(date_time(2,1), date_time(3,1)) , '%d');
+                end
+                 NumericData(:,nextCol) = Days;
+                 NumericData(:,nextCol+1) = Minutes;
+                 nextCol = nextCol+2;
+            else
+                for j=1:nRows
+                    NumericData{j,nextCol} = sprintf('"%s"',Data{j,i});
+                end
+                
+                nextCol = nextCol+1;
             end
-             NumericData(:,nextCol) = Days;
-             NumericData(:,nextCol+1) = Minutes;
-             nextCol = nextCol+2;
              
         % if integer/float value (include missing (NA))
         elseif(status)
@@ -50,11 +60,13 @@ function NumericData = CellToNumeric(Data)
         % if string value
         else
             %replace strings in column with numeric values
-            NumericData(:,nextCol) = StringToNumeric(Data(:,i));
-            
-            %for WEKA
-            %NumericData(:,nextCol) = Data(:,i);
-            
+            if(Str2Num)
+                NumericData(:,nextCol) = StringToNumeric(Data(:,i));
+            else
+                %for WEKA
+                NumericData(:,nextCol) = Data(:,i);
+            end
+
             nextCol = nextCol+1;
         end
     end
