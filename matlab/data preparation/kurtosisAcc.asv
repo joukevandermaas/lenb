@@ -1,0 +1,8 @@
+function kurt = kurtosisAcc(filename)
+xAcc = str2double(data3(:,3));
+
+kurt(1) = kurtosis(xAcc(1:n(1))')
+
+for l = 2:(length(n))
+    kurt(l) = kurtosis(xAcc(n(l-1):n(l))');
+end
