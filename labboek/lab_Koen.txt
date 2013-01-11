@@ -1,0 +1,26 @@
+08.01
+- paper lezen
+- data bekijken
+
+08.01
+-Gesprek met Frank
+
+09.01
+- Naar literatuur gezocht over supervised leren en om op ideeen te komen
+oa: http://staff.science.uva.nl/~bredeweg/pdf/BSc/20112012/Bodewes.pdf
+    http://www.waddenacademie.nl/fileadmin/inhoud/pdf/06-wadweten/Scripties/MScThesis_Roeland_Bom.pdf
+
+10.01
+door literatuur tot idee gekomen om oa kurtosis te berekenen als extra feature
+
+- matlab functie om de acceleratie data waar gedrag van bekent is eruit te halen
+  (sortOBs.m,accExtract.m)
+
+- matlab functies om de kurtosis te berekenen (maat voor piekvormigheid)
+  (dataSplit.m,kurtosisAcc.m)
+
+11.01
+- matlab functies afmaken
+
+11.01-12.01
+- kurtosis en mogelijk andere features in de data zetten die leesbaar is voor weka
