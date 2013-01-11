@@ -1,0 +1,32 @@
+08.01
+-Matlab functie gevonden voor CSV data in-read
+	bron:	http://stackoverflow.com/questions/4747834/matlab-import-csv-file-with-mixed-data-types
+-data (behaviour, habitat, model_output) omgeschreven naar .data/.names formaat voor WEKA
+-deze ingelezen en bestudeerd met WEKA (verdelingen)
+
+09.01
+-Gesprek met Frank:
+	-we gebruiken supervised learning met labeled examples.
+		
+
+-Matlab functies geschreven voor inlezen en numeriek maken van data 	(main.m)
+	-strings worden discrete nummers
+	-date_time wordt gesplitst in twee kolommen, 
+		day (n'de dag van het jaar) en 
+		time (m minuten na 00:00)
+	-'NA' wordt '?' (WEKA-compatible)
+-Data omgeschreven in nieuwe .csv files
+
+10.01
+
+-weka data aanpassen op ARFF formaat
+
+-matlab functie (main.m) voor data preparation uitbreiden om de 'gps' en 'predictors' aan de behaviour classificaties te plakken
+	-argumenten in CellToNumeric voor splitDate en Str2Num
+	
+	(mainAppend_GPS_PRED_BEH.m)
+	- 2 nieuwe data-files met alle kolommen uit gps, preditors en behaviour
+		-date_time split
+		-date_time raw (date_time moet tussen "" voor WEKA)
+	- 2 nieuwe voor WEKA (strings ipv num)
+
