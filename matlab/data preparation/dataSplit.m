@@ -1,5 +1,5 @@
 function n = dataSplit(filename)
-
+% tells from where to where the data has to split for anylizing
 filename = '../../data/raw/behaviour.csv';
 
 obsIDs = sortObsIDs(filename);

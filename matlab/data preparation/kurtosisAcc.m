@@ -10,3 +10,7 @@ kurt(1) = kurtosis(xAcc(1:n(1))');
 for l = 2:(length(n))
     kurt(l) = kurtosis(xAcc(n(l-1):n(l))');
 end
+
+% transforms it in a csv file
+%C = num2cell(kurt')
+%WriteCellArrayToFile(C, '../../data/accelerometer_supervised/kurtosis.csv', ',');
