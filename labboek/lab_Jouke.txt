@@ -1,0 +1,21 @@
+08.01
+
+09.01
+- Gesprek met Frank:
+  - we gebruiken supervised learning met labeled examples.
+
+- Inlezen in weka commandline en arff-bestandsformaat
+- Schrijven van simpele code voor omzetten van csv naar arff
+  voor als weka dit niet goed doet (datums).
+
+10.01
+- Met behulp van aangepaste data (meer dingen in een tabel)
+  een script schrijven dat een beslisboomleerder op de data
+  laat leren. 
+
+- beslisboomleerder laten leren op data met en zonder gps-kolommen.
+  Het lijkt dat het algoritme op de data met gps aan het overfitten is.
+  Aanpassen van de pruning-sterkte verbetert het resultaat, maar niet veel.
+
+11.01
+- Kleine verbeteringen in het script voor weka.
