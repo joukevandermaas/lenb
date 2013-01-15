@@ -4,24 +4,14 @@
 # the same folder as the original file.
 
 import sys
-import os.path
+import os
+import subprocess
 
 filename = sys.argv[1]
 dir = os.path.dirname(filename) + "/"
 name = os.path.splitext(os.path.basename(filename))[0]
 
-orig = open(filename, "rt")
-arff = open(dir + name + ".arff", "wt")
-attr = open(dir + "/arff_attributes/" + name + ".txt", "rt")
-
-# write arff header
-arff.write("@relation " + name + "\n\n")
-arff.write(attr.read())
-
-# just dump data (it's csv anyway)
-arff.write("\n\n@data\n")
-arff.writelines(orig.readlines())
-
-orig.close()
-arff.close()
-attr.close()
+file = open(dir + name + ".arff", "wt")
+p = subprocess.Popen(["java", "weka.core.converters.CSVLoader", filename], stdout = file)
+p.wait()
+file.close()

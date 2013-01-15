@@ -1,22 +1,12 @@
-%Areg Shahbazian, 10283234
+%Jouke van der Maas, 10186883
 %file: main.m
-%created: 07.01.2013
-%last edited: 08.01.2013
-function mainAppend_GPS_PRED_BEH_all()
+%created: 15.01.2013
+%last edited: 15.01.2013
+function AppendedData = mainBuild_gpsdata()
 %MAIN 
-%   This function rewrites the data for classification and for use in WEKA.
-%   -Functions used: WriteCellArrayToFile.m, strMemberOfARR.m, StringToNumeric.m,
-%       read_mixed_csv.m, FileToCells.m, DayOfYear.m, CellToNumeric.m
-%   -Numeric values are copied
-%   -Discrete string values are made numeric
-%   -Values in date_time format 'yyyy-mm-dd hh:mm:ss' are split into 'day' and 'minute'
-%   -'NA' is rewritten as '?'
+%   This function takes the gps-dataset and adds columns
+%   for the previous datapoint's data.
 
-    % append gps and predictors data to behaviour classes
-    % ________________________________________________
-    %BEHAVIOUR = FileToCells('../../data/raw/behaviour.csv', ',');
-    %behaviour = CellToNumeric(BEHAVIOUR,1,1);
-    
     GPS = FileToCells('../../data/raw/gps.csv', ',');
     % delete row_names column
     GPS(:,1) = [];
