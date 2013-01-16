@@ -29,8 +29,14 @@ def test_cluster(cluster, input, output, model_input="classifier_model.dat", arg
                           "-l", add_quotes(model_input),
                           "-T", add_quotes(input)]
                          + arguments,
-                         stdout=file)
-    p.wait()
+                         stdout=subprocess.PIPE)
+    lines = []
+    line = p.stdout.readline()
+    while (line != b'\r\n'):
+        lines.append(line)
+        line = p.stdout.readline()
+
+    file.writelines([item.decode("utf-8") for item in lines])
     file.close()
 
 def csv_to_arff(input, output):
