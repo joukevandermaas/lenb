@@ -5,7 +5,7 @@ from weka_functions import *
 
 pruningConf = "0.25" # default 0.25
 
-filename = "data/appended/gps_data"
+filename = "data/appended/gps_data_extended"
 tmpdir = "tmp/"
 clusterer = "clusterers.SimpleKMeans"
 
@@ -19,9 +19,12 @@ else:
     
 if (steps[0]):
     print("Preparing data...")
+    subprocess.call(["python", "generate_arff.py", filename + ".csv"])
+    subprocess.call(["python", "generate_arff.py", filename + "_classes.csv"])
+
     remove_columns("3-last", filename + ".arff", tmpdir + "0.tmp.arff")
     resample_data("100", tmpdir + "0.tmp.arff", tmpdir + "1.tmp.arff")
-    remove_columns("3-12", filename + "_classes.arff", tmpdir + "2.tmp.arff")
+    remove_columns("3-9", filename + "_classes.arff", tmpdir + "2.tmp.arff")
     print("   Done.")
 
 if (steps[1]):
