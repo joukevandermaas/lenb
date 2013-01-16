@@ -1,6 +1,12 @@
 import os
 import subprocess
 
+def resample_data(percent, input, output):
+    subprocess.call(["java", "weka.filters.unsupervised.instance.Resample",
+              "-Z", percent,
+              "-i", add_quotes(input),
+              "-o", add_quotes(output)])
+
 def remove_columns(columns, input, output):
     subprocess.call(["java", "weka.filters.unsupervised.attribute.Remove", 
               "-R", columns, "-V",  # columns to keep 
