@@ -19,7 +19,10 @@ function [ output_args ] = mainBuild_gpsdata_classes()
     
     gps = mainBuild_gpsdata();
     
-    habitat = findHabitat();
+    HABITAT = FileToCells('../../data/raw/habitat.csv', ',');
+    habitat = CellToNumeric(HABITAT,1,1);
+    
+    %habitat = findHabitat();
     
     AppendedData = cell(size(habitat,1),1);
     % append data to classes
@@ -53,17 +56,17 @@ function [ output_args ] = mainBuild_gpsdata_classes()
             end
         end
 
-        for k=2:size(behaviour,2)
-            AppendedData{i,nextColumn} = behaviour{i,k};
-            nextColumn = nextColumn + 1;
-        end
+%         for k=2:size(behaviour,2)
+%             AppendedData{i,nextColumn} = behaviour{i,k};
+%             nextColumn = nextColumn + 1;
+%         end
         
     end
     
     header = {'obsID', 'birdID', 'day', 'min', 'y', 'x', 'speed', ...
         'prevDay', 'prevMin', 'prevY', 'prevX', 'prevSpeed', ...
-        'timelbl2', 'timelbl3', 'place', 'c3', 'c8', 'c16'};
-    WriteCellArrayToFile([header;AppendedData], '../../data/appended/gps_habitat_data_classes.csv', ',');
+        'timelbl2', 'timelbl3', 'place'};%, 'c3', 'c8', 'c16'};
+    WriteCellArrayToFile([header;AppendedData], '../../data/appended/gps_habitat_data_classes_all.csv', ',');
     
     % ________________________________________________
     
