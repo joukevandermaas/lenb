@@ -11,12 +11,21 @@ function [ numeric_speeds ] = clean_speeds( text_speeds )
            crappy_speeds = [crappy_speeds i];
        end
     end
-    
     for i = 1:length(crappy_speeds)
         if (crappy_speeds(i) == 1)
             numeric_speeds(1) = numeric_speeds(2);
         elseif (crappy_speeds(i) == length(numeric_speeds))
             numeric_speeds(end) = numeric_speeds(end-1);
+        elseif i<length(crappy_speeds) && (crappy_speeds(i)+1 == crappy_speeds(i+1))
+            bla = bla + 1;
+            numeric_speeds(crappy_speeds(i)) = ...
+                (2/3)*(numeric_speeds(crappy_speeds(i) - 1)) + ...
+                (1/3)*(numeric_speeds(crappy_speeds(i) + 2));
+        elseif i>1 && (crappy_speeds(i)-1 == crappy_speeds(i-1))
+            bla2 = bla2 + 1;
+            numeric_speeds(crappy_speeds(i)) = ...
+                (1/3)*(numeric_speeds(crappy_speeds(i) - 2)) + ...
+                (2/3)*(numeric_speeds(crappy_speeds(i) + 1));
         else
             numeric_speeds(crappy_speeds(i)) = ...
                 (numeric_speeds(crappy_speeds(i) - 1) + ...
@@ -24,4 +33,3 @@ function [ numeric_speeds ] = clean_speeds( text_speeds )
         end
     end
 end
-
