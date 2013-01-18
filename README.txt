@@ -1,8 +1,17 @@
+Om alles te kunnen gebruiken
+===========================================
+- Python moet geinstalleerd zijn (ik heb versie 3.x)
+- Java moet geinstalleerd zijn.
+- Weka moet geinstalleerd zijn.
+- Weka moet aan je java classpath zijn toegevoegd (google het).
+
 Hoe nieuwe features toe te voegen/te testen
 ===========================================
 1 Schrijf code in matlab/preperation/mainBuild_gpsdata_extended.m
   Dit bestand is messy, maar het toevoegen van de features begint rond
   regel 60, met AppendedData(...) = [point, ...
+
+2 Pas de variabele header onderaan dit bestand aan voor de nieuwe features.
 
 2 Pas het getal extraAttributes (regel 23) in dit bestand aan, verhoog het als je dingen
   toevoegt, verlaag het als je dingen weghaalt.
