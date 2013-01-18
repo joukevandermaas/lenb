@@ -1,4 +1,5 @@
 function L = gfilter( L, sigma, orders )
+% source: http://www.mathworks.com/matlabcentral/fileexchange/19696-gaussdiff
 % GFILTER - Gaussian filterering and Gaussian derivative filters
 %
 % Lg = gfilter( L, sigma ) performes Gaussian smoothing with on the data L.

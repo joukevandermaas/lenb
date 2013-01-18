@@ -1,4 +1,5 @@
 function  [k t] = gaussiankernel(sigma, order, sigma2szeRatio)
+% source: http://www.mathworks.com/matlabcentral/fileexchange/19696-gaussdiff
 % GAUSSIAN DERIVATIVE KERNEL - creates a gaussian derivative kernel.
 %
 % k = gaussiankernel(SIGMA,ORDER) creates a Gaussian derivative
