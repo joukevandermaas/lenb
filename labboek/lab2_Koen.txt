@@ -1,0 +1,15 @@
+14.01
+- Voortgang bespreking met Maarten
+
+15.01
+- Lezen over semi-supervised leren
+
+16.01
+- Habitat aan leer-data toegevoegd (findHabitat.m, appendHabitat.m)
+
+17.01
+- Features proberen te bedenken, acceleratie uit de speed van gps halen bedacht en hoe het moet worden berekend
+
+18.01
+- acceleratie feature ge-implementeerd (accFromGPS.m, gaussiankernel.m, gfilter.m)
+- speed data opgeschoond (clean_speeds.m)
