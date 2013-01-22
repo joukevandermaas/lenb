@@ -12,6 +12,7 @@ function [AppendedData, header] = mainBuild_gpsdata_extended()
     % delete row_names column
     GPS(:,1) = [];
     gps = CellToNumeric(GPS, 1,1);
+    
         % obsid, birdid, day, min, ticks, y, x, speed
         %     1,      2,   3,   4,     5, 6, 7,     8
     
@@ -19,6 +20,7 @@ function [AppendedData, header] = mainBuild_gpsdata_extended()
     ids = str2double(gps(:,1));
     [~,IX] = sort(ids);
     gps = gps(IX, :);
+   
     
     extraAttributes = 8;
     
@@ -42,9 +44,11 @@ function [AppendedData, header] = mainBuild_gpsdata_extended()
             if (trajStart(k) + 1 ~= trajStart(k+1))
                 chunk_ic = birdDataIds(trajStart(k):(trajStart(k+1)-1));
                 
-                text_speeds = gps(chunk_ic,8);
+                chunk_times = times(chunk_ic);
+                text_speeds = gps(chunk_ic, 8);
                 num_speeds = clean_speeds(text_speeds);
-                acceleration = gfilter(num_speeds, 2, [0 1]);
+                acceleration = diff(num_speeds)./diff(chunk_times);
+                %acceleration = gfilter(num_speeds, 2, [0 1])
                 
                 chunk = gps(chunk_ic,:);
                     
@@ -57,16 +61,16 @@ function [AppendedData, header] = mainBuild_gpsdata_extended()
                 totalDistance = sum(diag(distances, 1));
                 directDistance = pdist(numericData([1,end], [3 4]));
 
-                chunk_times = times(chunk_ic);
-                totalTime = pdist(chunk_times([1 end]));
+                
+                totalTime = pdist(chunk_times([1 end])) * 100;
                                
-                for j = 1:length(chunk_ic)
+                for j = 2:length(chunk_ic)
                     point = gps(chunk_ic(j), [1 2 3 4 8]);
                                         
                     AppendedData(chunk_ic(j), :) = [point, ...
-                        num2str(acceleration(j), '%f'), ...
+                        num2str(acceleration(j-1), '%f'), ...
                         num2str(totalArea, '%f'), ...
-                        num2str(totalTime, '%d'), ...
+                        num2str(totalTime, 100), ...
                         num2str(directDistance, '%f'), ...
                         num2str(totalDistance, '%f'), ...
                         num2str(directDistance/totalTime, '%f'), ...
