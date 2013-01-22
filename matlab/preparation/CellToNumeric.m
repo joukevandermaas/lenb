@@ -28,14 +28,17 @@ function NumericData = CellToNumeric(Data, splitDates, Str2Num)
             if(splitDates)
                 Days = cell(nRows,1);
                 Minutes = cell(nRows,1);
+                Ticks = cell(nRows,1);
                 for j=1:nRows
                     date_time = sscanf(Data{j,i}, '%d-%d-%d %d:%d:%d');
+                    Ticks{j,1} = datenum(Data{j,i});
                     Minutes{j,1} = num2str(((date_time(4,1)*60)+date_time(5,1)), '%d');
                     Days{j,1} = num2str(DayOfYear(date_time(2,1), date_time(3,1)) , '%d');
                 end
-                 NumericData(:,nextCol) = Days;
-                 NumericData(:,nextCol+1) = Minutes;
-                 nextCol = nextCol+2;
+                NumericData(:,nextCol) = Days;
+                NumericData(:,nextCol+1) = Minutes;
+                NumericData(:,nextCol+2) = Ticks;
+                nextCol = nextCol+3;
             else
                 for j=1:nRows
                     NumericData{j,nextCol} = sprintf('"%s"',Data{j,i});
