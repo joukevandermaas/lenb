@@ -2,7 +2,7 @@
 %file: main.m
 %created: 07.01.2013
 %last edited: 08.01.2013
-%function [ output_args ] = mainBuild_gpsdata_extended_classes()
+function [ output_args ] = mainBuild_gpsdata_extended_classes()
 %MAIN 
 %   This function rewrites the data for classification and for use in WEKA.
 %   -Functions used: WriteCellArrayToFile.m, strMemberOfARR.m, StringToNumeric.m,
@@ -14,36 +14,45 @@
 
     % append gps and predictors data to behaviour classes
     % ________________________________________________
-    %BEHAVIOUR = FileToCells('../../data/raw/behaviour.csv', ',');
-    %behaviour = CellToNumeric(BEHAVIOUR,1,1);
+    BEHAVIOUR = FileToCells('../../data/raw/behaviour.csv', ',');
+    behaviour = CellToNumeric(BEHAVIOUR,1,1);
     
-    %gps = mainBuild_gpsdata_extended();
+    disp('Generating complete data...')
+    [gps header] = mainBuild_gpsdata_extended();
+    disp('   Done.')
+    disp('Generating appended data...')
     
     %PREDICTORS = FileToCells('../../data/raw/predictors.csv', ',');
     %predictors = CellToNumeric(PREDICTORS, 1, 1);
     
-    AppendedData = cell(size(behaviour,1),10);
+    AppendedData = cell(size(behaviour,1),size(gps, 2) + 3);
     % append data to classes
     ids = str2double(behaviour(:, 1));
     gpsIds = str2double(gps(:, 1));
     
     for i = 1:length(ids)
-       j = find(gpsIds == ids(i));
-       AppendedData(i, :) = ...
-           [gps(j, :), behaviour(i, 2:4)];
+       j = gpsIds == ids(i);
+       if (sum(j) > 0)      
+           AppendedData(i, :) = ...
+              [gps(j, :), behaviour(i, 2:4)];
+       end
     end
     
-    header = {'obsID', 'birdID', 'day', 'min', 'speed', ...
-        'trajectory', 'distance', 'c3', 'c8', 'c16'};
+    % remove empty cells
+    empty = cellfun('isempty', AppendedData); 
+    AppendedData(all(empty,2),:) = [];
+    
+    header = [header, {'c3', 'c8', 'c16'}];
     
     WriteCellArrayToFile([header;AppendedData], '../../data/appended/gps_data_extended_classes.csv', ',');
     
+    disp('   Done.')
     % ________________________________________________
 
     
-    
+    beep
     output_args = 1;
-%end
+end
 
 
 

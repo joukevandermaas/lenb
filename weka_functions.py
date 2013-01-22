@@ -15,7 +15,7 @@ def remove_columns(columns, input, output):
     
 def learn_cluster(cluster, input, output, model_output="classifier_model.dat", arguments=[]):
     file = open(output, "wt")
-    p = subprocess.Popen(["java", "weka." + cluster, 
+    p = subprocess.Popen(["java", "-Xms1g", "-Xmx1g", "weka." + cluster, 
                       "-d", add_quotes(model_output),
                       "-t", add_quotes(input)]
                       + arguments,         
@@ -32,10 +32,11 @@ def test_cluster(cluster, input, output, model_input="classifier_model.dat", arg
                          stdout=subprocess.PIPE)
     lines = []
     line = p.stdout.readline()
-    while (line != b'\r\n'):
+    while (line != b'\n'):
         lines.append(line)
         line = p.stdout.readline()
-
+    lines[-1] = lines[-1].rstrip()
+    
     file.writelines([item.decode("utf-8") for item in lines])
     file.close()
 
