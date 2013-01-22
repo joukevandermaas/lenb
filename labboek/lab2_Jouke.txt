@@ -1,0 +1,18 @@
+14.01
+- Voortgang bespreking met Maarten
+
+15.01
+- Gesprek met Frank
+- Features toevoegen voor het clusteren (prevTime, prevSpeed, etc)
+- Lezen over semi-supervised leren
+
+16.01
+- Meer features toegevoegd, scripts geschreven om testen makkelijker te maken
+
+17.01
+- Features proberen te bedenken, acceleratie uit de speed van gps halen bedacht en hoe het moet worden berekend
+- Scripts toegangelijker maken, uitleg schrijven voor anderen.
+
+18.01
+- Combinaties van andere features geprobeerd
+- speed data opgeschoond (clean_speeds.m)
