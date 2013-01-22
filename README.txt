@@ -7,18 +7,13 @@ Om alles te kunnen gebruiken
 
 Hoe nieuwe features toe te voegen/te testen
 ===========================================
-1 Schrijf code in matlab/preperation/mainBuild_gpsdata_extended.m
-  Dit bestand is messy, maar het toevoegen van de features begint rond
-  regel 60, met AppendedData(...) = [point, ...
+1 Schrijf code in matlab/prep_tables/build_trajectory_attributes.m
 
-2 Pas de variabele header onderaan dit bestand aan voor de nieuwe features.
+2 Pas de variabele header bovenaan dit bestand aan voor de nieuwe features.
 
-2 Pas het getal extraAttributes (regel 23) in dit bestand aan, verhoog het als je dingen
-  toevoegt, verlaag het als je dingen weghaalt.
+3 Verander het getal extraAttributes in matlab/interpretation/interpret_result.m
 
-3 Pas dit getal aan naar hetzelfde als bij stap 2 in matlab/interpretation/interpret_result.m op regel 3.
-
-4 Pas het getal op regel 25 in run_classifier.py aan. Dit getal moet zijn
+4 Pas het getal op regel 9 in run_classifier.py aan. Dit getal moet zijn
   extraAttributes + 5
 
 Als je stap 2, 3 of 4 overslaat werken de volgende stappen niet.
