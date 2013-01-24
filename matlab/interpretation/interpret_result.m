@@ -1,8 +1,8 @@
-addpath('../preparation');
+addpath('../prep_tables');
 
-extraClasses = 5;
+extraAttributes = 5;
 
-data = csvread('../../data/appended/gps_data_extended_classes.csv',1,5+extraClasses);
+data = csvread('../../data/appended/gps_data_extended_classes.csv',1,5+extraAttributes);
 results = dlmread('../../classifier_result.txt', ' ');
 
 [clusters, ~, indices] = unique(results(:, 2));
