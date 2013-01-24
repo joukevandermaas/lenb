@@ -24,6 +24,9 @@ def learn_cluster(cluster, input, output, model_output="classifier_model.dat", a
     file.close()
 
 def test_cluster(cluster, input, output, model_input="classifier_model.dat", arguments=[]):
+    end = b'\n'
+    if os.name == 'nt':
+        end = b'\r\n'
     file = open(output, "wt")
     p = subprocess.Popen(["java", "weka." + cluster,
                           "-l", add_quotes(model_input),
@@ -32,7 +35,7 @@ def test_cluster(cluster, input, output, model_input="classifier_model.dat", arg
                          stdout=subprocess.PIPE)
     lines = []
     line = p.stdout.readline()
-    while (line != b'\n'):
+    while (line != end):
         lines.append(line)
         line = p.stdout.readline()
     lines[-1] = lines[-1].rstrip()
