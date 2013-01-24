@@ -12,6 +12,15 @@ def remove_columns(columns, input, output):
               "-R", columns, "-V",  # columns to keep 
               "-i", add_quotes(input),    # input file
               "-o", add_quotes(output)])  # output file
+
+def apply_classifier(classifier, input, output, arguments=[]):
+    file = open(output, "wt")
+    p = subprocess.Popen(["java", "weka.classifiers." + classifier, 
+                      "-t", add_quotes(input)]  # input file
+                      + arguments,
+                     stdout=file) # write stdout to file
+    p.wait()
+    file.close()
     
 def learn_cluster(cluster, input, output, model_output="classifier_model.dat", arguments=[]):
     file = open(output, "wt")
