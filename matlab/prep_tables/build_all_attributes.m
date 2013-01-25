@@ -14,7 +14,7 @@ function [ result, header, traj_lookup ] = build_all_attributes( data )
     for i = 1:size(birds)
         birdDataIds = find(birdIds == birds(i));
         
-        trajStart = find_traj_startingpointsNEW(times(birdDataIds));
+        trajStart = find_traj_startingpoints(times(birdDataIds));
         
         for k = 1:(length(trajStart)-1) % for each trajectory
             if (trajStart(k) + 1 ~= trajStart(k+1)) % no single points
