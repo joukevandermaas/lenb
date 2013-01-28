@@ -1,0 +1,16 @@
+22.01
+- Gesprek met opdrachtgever
+- Verdelen taken en plan maken
+- Beter indelen van de code
+
+23.01
+- Opschonen van de code
+- Code schrijven voor het leren met clusters als klassen
+
+24.01
+- Gebruiken van clusters als klassen, leren met beslisboom
+- Bepalen welke features belangrijk zijn, welke variatie hebben, etc.
+	
+25.01
+- Schrijven van code voor het anders opsplisten van trajectories
+- Omschakelen van trajectories als groep punten naar trajectories als datapunt
