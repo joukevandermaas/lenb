@@ -1,0 +1,19 @@
+21.01
+- Voortgang bespreking met Maarten
+
+22.01
+- Gesprek met opdrachtgever Emiel van Loon, aan de hand van de dingen die hij had gezegd taken opgedeelt
+
+23.01
+- Naar de features gekeken, tot de conclusie gekomen dat acceleration te inaccuraat is en 
+  daardoor niks toevoegt
+
+24.01
+- Nieuwe features bedenken, door naar de documentatie van adeHabitat te kijken, daaruit is tortuosity gekomen
+- De feature 'tortuosity' toegevoegd, de verhouding tussen totale afstand en loodrechte afstand 
+  die de vogel in een trajetory aflegt
+
+25.01
+- Scripts geschreven om attributen per cluster te kunnen bekijken (seperate_class.m en writeSeperated2File.m)
+- Naar verschillen van de attributen per clusters gekeken, met de oorspronkelijke trajectories,
+  Niks uit kunnen halen, behalve dat alle waardes van de meeste clusters dicht bij elkaar lagen
