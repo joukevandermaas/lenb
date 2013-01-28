@@ -31,7 +31,7 @@ function [ result, header, traj_lookup ] = build_all_attributes( data )
             end
         end
     end
-    
+
     header = ['trajID', header];
     % remove empty cells
     empty = cellfun('isempty', result); 

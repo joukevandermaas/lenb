@@ -8,6 +8,6 @@ classes = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
 class_column = cell(size(results,1), 1);
 class_column(:) = classes(results(:, 2));
 
-header = [header, 'class']
+header = [header, 'cluster'];
 table = [data, class_column];
 WriteCellArrayToFile([header;table], '../../data/appended/cluster_classes.csv', ',');

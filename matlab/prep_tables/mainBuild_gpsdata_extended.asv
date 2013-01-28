@@ -8,6 +8,7 @@ function [AppendedData, header] = mainBuild_gpsdata_extended(gps)
     end
 
     [AppendedData header traj_lookup] = build_all_attributes(gps);
+    
     WriteNestedCells(traj_lookup, '../../data/appended/traj_lookup.txt');
     
     WriteCellArrayToFile([header;AppendedData], ...
