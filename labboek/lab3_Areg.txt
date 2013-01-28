@@ -1,0 +1,12 @@
+22.01
+
+-nieuwe manier van tarajectories bedenken
+
+	-split in non-single, 60 seconden strajectories: te weinig trajectories over
+	
+25.01
+	-clusteren van voorgaande trajectories om nieuwe trajectories te krijgen: 
+		De datapunten in de clusters zijn niet in chronologische volgorde, dus niet handig.
+	-splitsten in trajectories van maximaal 30 min, minimaal 3 datapunten
+		nieuwe functie geschreven: find_startingpoints NEW .m
+
